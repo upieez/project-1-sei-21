@@ -4,8 +4,8 @@
 
 .donut {
 	border: 1px solid fuchsia;
-	height: 25px;
-	width: 25px;
+	height: 40px;
+	width: 40px;
 	font-size: 10px;
 }
 
@@ -36,7 +36,7 @@
 
 .donut-box{
 	border: 5px solid purple;
-	background-color: grey;
+/*	background-color: none;*/
 	display: inline-block;
 	width: 300px;
 	height: 300px;
@@ -80,5 +80,9 @@ button {
 	position: absolute;
 	top: 80%;
 	left: 40%;
+}
 
+img {
+	height: 40px;
+	width: 40px;
 }
