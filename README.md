@@ -7,6 +7,12 @@
 1. This game will help me understand CSS better and improve on it
 2. This game will also help me to review my javascript basics and logic
 
+#### Resources
+
+- Good free game art I took is from [OpenGameArt](https://opengameart.org/)
+ - Credit to [William](https://opengameart.org/content/donut-pack) for the donut icons
+
+
 #### Creating a wireframe 
 
 > The wireframes are the floor plan for your website, creating a vessel for which design and content can flow into.
@@ -22,8 +28,23 @@
 #### MVP
 
 - Be able to click on the donut and have it to populate the box
+-	Be able to display donut images on the side bar, donut box and the objective
+- Show the user that the donut matches
 
 #### Stage 1
 
 - Creating my HTML and implementing the divs inside of it as per my rough sketch
-- Create the styling to have a visual implantation of how my design of the game should be like
+- Create the styling to have a basic visual implantation of how my design of the game should be like
+- Create basic javascript function to have the base game running (i.e adding the donut to the donut box, checking the donut box has the same amount of donut in the objective)
+
+#### Stage 2
+
+- Reformat javascript codes to be able to implement donut visuals into the game.
+- Randomize the donut array to display different amount of it every time it refreshes.
+- Format the style to make it look slightly more visually appealing
+
+#### Further ideas (in progress)
+- Generate random donut icons in the array
+- Display a list different donuts in the donut selection
+- Have a function to drag it instead of clicking
+- Animation(?)
