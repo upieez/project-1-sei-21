@@ -1,6 +1,24 @@
 console.log("Donut game project!")
 
-var container = document.querySelector(".container");
-var words = document.createElement("div");
-words.textContent = "TEST 1 PHASE IN PROGRESS!";
-container.appendChild(words);
+//----Global Variable----
+var count = 0;
+
+
+//----Add Donut Function ----
+var addDonut = function () {
+    if (count < 6){
+        count++;
+        var donutBox = document.querySelector(".donut-box");
+        var div = document.createElement("div");
+        div.classList.add("donut");
+        div.innerHTML = "DONUT PLACEMENT";
+        donutBox.appendChild(div);
+    }
+}
+
+var addDonutToContainer = function(){
+var clicker = document.querySelector('.donut-clicker > .donut')
+clicker.addEventListener("click", addDonut);
+};
+
+addDonutToContainer();
