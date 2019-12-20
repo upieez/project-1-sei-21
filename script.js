@@ -2,20 +2,22 @@ console.log("Donut game project!")
 
 //----Image Sources in a variable----
 var plainDonut = "<img src='images/donuts/plain/plain_donut.png'>"
+var chocDonut = "<img src='images/donuts/brown/brown_donut_8.png'>"
+
 
 //----Global Variable----
 var count = 0;
 
 
 //----Input Donut Function to Donut Box ----
-var addDonut = function() {
+var addDonut = function(){
 //If statement to only add donuts if it's less than 6
     if (count < 6){
         count++;
         var donutBox = document.querySelector(".donut-takeaway");
         var div = document.createElement("div");
         div.classList.add("donut");
-        div.innerHTML = plainDonut;
+        div.innerHTML = chocDonut;
         donutBox.appendChild(div);
     }
 }
@@ -27,7 +29,7 @@ clicker.addEventListener("click", addDonut);
 
 addDonutToContainer();
 
-//----Check for correct amount of donut in donut box from donut array----
+//----Check for Correct Amount Function----
 
 var checkForCorrectAmt = function(){
 
@@ -49,4 +51,22 @@ selectButton.addEventListener("click", checkForCorrectAmt);
 
 buttonChecker();
 
-//----
+//----Generate Random Donut Amount Function----
+
+var generateRandomArray = function(){
+    var randomNumber = Math.round(2 + Math.random() * 1) // only till 3 atm
+    var donutObjective = document.querySelector(".donut-objective");
+    var donutArray = document.createElement("div");
+    donutArray.classList.add("donut-array");
+    // for loop to print out random amount of donut into the donut array
+    for (var i = 0; i < randomNumber; i++){
+        var donut = document.querySelector(".donut-array");
+        var donutDiv = document.createElement("div");
+        donutDiv.classList.add("donut");
+        donutDiv.innerHTML = plainDonut;
+        donutArray.appendChild(donutDiv);
+    }
+    donutObjective.appendChild(donutArray);
+}
+
+generateRandomArray();
