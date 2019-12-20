@@ -11,6 +11,9 @@
 
 .donut-box .donut{
 	margin: 0 auto;
+/*	position: absolute;
+	right: 50%;
+	bottom: 65%;*/
 }
 
 .donut-objective {
@@ -24,6 +27,7 @@
 }
 .donut-container{
 	border: 5px solid yellow;
+	position: relative;
 	padding-right: 1px;
 	display: inline-block;
 	padding-bottom: 150px;
@@ -32,6 +36,7 @@
 
 .donut-box{
 	border: 5px solid purple;
+	background-color: grey;
 	display: inline-block;
 	width: 300px;
 	height: 300px;
@@ -69,4 +74,11 @@
 #player-points{
 	border: 5px solid teal;
 	display: inline-block;
+}
+
+button {
+	position: absolute;
+	top: 80%;
+	left: 40%;
+
 }
