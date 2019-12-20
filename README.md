@@ -1,4 +1,4 @@
-# project-1-sei-21
+# PROJECT-1-SEI-21 DOCUMENTATION
 
 ![https://media.giphy.com/media/l4FGHzb9sBnQmYjyU/giphy.gif](https://media.giphy.com/media/l4FGHzb9sBnQmYjyU/giphy.gif)
 
@@ -25,4 +25,5 @@
 
 #### Stage 1
 
-Creating my html and implementing the divs inside of it as per my rough sketch
+- Creating my HTML and implementing the divs inside of it as per my rough sketch
+- Create the styling to have a visual implantation of how my design of the game should be like
