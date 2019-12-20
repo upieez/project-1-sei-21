@@ -1,24 +1,27 @@
 console.log("Donut game project!")
 
+//----Image Sources in a variable----
+var plainDonut = "<img src='images/donuts/plain/plain_donut.png'>"
+
 //----Global Variable----
 var count = 0;
 
 
 //----Input Donut Function to Donut Box ----
-var addDonut = function () {
+var addDonut = function() {
 //If statement to only add donuts if it's less than 6
     if (count < 6){
         count++;
         var donutBox = document.querySelector(".donut-takeaway");
         var div = document.createElement("div");
         div.classList.add("donut");
-        div.innerHTML = "DONUT PLACEMENT";
+        div.innerHTML = plainDonut;
         donutBox.appendChild(div);
     }
 }
 
 var addDonutToContainer = function(){
-var clicker = document.querySelector('.donut-clicker > .donut')
+var clicker = document.querySelector(".donut-clicker > .donut")
 clicker.addEventListener("click", addDonut);
 };
 
@@ -28,13 +31,12 @@ addDonutToContainer();
 
 var checkForCorrectAmt = function(){
 
-var donutBox = document.querySelector(".donut-takeaway").innerText;
-var donutArray = document.querySelector(".donut-array").innerText;
-var checkDonutArray = donutArray.split("\n");
-var checkDonutBox = donutBox.split("\n");
+var donutArray = document.querySelectorAll(".donut-array > .donut")
+var donutBox = document.querySelectorAll(".donut-takeaway > .donut")
+
 //----If statement to check the correct amount in box----
- if (checkDonutArray.length === checkDonutBox.length){
-    alert("correct!");
+ if (donutArray.length === donutBox.length){
+    alert("correct!"); // I can create a function here to check if the donuts inside are all the same
     } else {
         alert("wrong!");
     }
