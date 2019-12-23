@@ -17,11 +17,12 @@ var addDonut = function(){
         var donutBox = document.querySelector(".donut-takeaway");
         var div = document.createElement("div");
         div.classList.add("donut");
-        div.innerHTML = chocDonut;
+        div.innerHTML = plainDonut;
         donutBox.appendChild(div);
     }
 }
 
+//addDonut function runs when click on donut image
 var addDonutToContainer = function(){
 var clicker = document.querySelector(".donut-clicker > .donut")
 clicker.addEventListener("click", addDonut);
@@ -37,7 +38,7 @@ var firstArray = document.querySelectorAll(".donut-objective > .donut-array")[0]
 var donutArray = firstArray.querySelectorAll(".donut-array > .donut");
 var donutBox = document.querySelectorAll(".donut-takeaway > .donut");
 
-//----If statement to check the correct amount in box----
+//If statement to check the correct amount in box
  if (donutArray.length === donutBox.length){
     alert("correct!"); // I can create a function here to check if the donuts inside are all the same in the array
     clearDonut();
@@ -48,6 +49,7 @@ var donutBox = document.querySelectorAll(".donut-takeaway > .donut");
     }
 };
 
+//checkForCorrectAmt Function runs when button is clicked
 var buttonChecker = function(){
 var selectButton = document.querySelector("button");
 selectButton.addEventListener("click", checkForCorrectAmt);
@@ -58,24 +60,25 @@ buttonChecker();
 //----Generate Random Donut Amount Function----
 
 var generateRandomDonut = function(){
+    var counter = document.querySelector(".donut-objective").childElementCount
+    if (counter < 5){
     var randomNumber = Math.round(2 + Math.random() * 1) // only till 3 atm
     var donutObjective = document.querySelector(".donut-objective");
     var donutArray = document.createElement("div");
     donutArray.classList.add("donut-array");
-    // for loop to print out random amount of donut into the donut array
-    for (var i = 0; i < randomNumber; i++){
-        var donut = document.querySelector(".donut-array");
-        var donutDiv = document.createElement("div");
-        donutDiv.classList.add("donut");
-        donutDiv.innerHTML = plainDonut;
-        donutArray.appendChild(donutDiv);
+        // for loop to print out random amount of donut into the donut array
+        for (var i = 0; i < randomNumber; i++){
+            var donut = document.querySelector(".donut-array");
+            var donutDiv = document.createElement("div");
+            donutDiv.classList.add("donut");
+            donutDiv.innerHTML = plainDonut;
+            donutArray.appendChild(donutDiv);
+            }
+            donutObjective.appendChild(donutArray);
     }
-    donutObjective.appendChild(donutArray);
 }
 
 setInterval(generateRandomDonut, 5000); //setInterval to keep adding more objective to the game
-
-//Can set a counter to generate how many times you want. If counter goes beyond a certain number, stop generating i.e global variable
 
 //----Clear the donut objective when correct----
 
