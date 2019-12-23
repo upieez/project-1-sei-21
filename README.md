@@ -2,8 +2,6 @@
 
 ![https://media.giphy.com/media/l4FGHzb9sBnQmYjyU/giphy.gif](https://media.giphy.com/media/l4FGHzb9sBnQmYjyU/giphy.gif)
 
-- - - -
-
 ## Motivation
 
 1. This game will help me understand CSS better and improve on it
@@ -13,18 +11,21 @@
 
 - Good free game art I took is from [OpenGameArt](https://opengameart.org/)
  	- Credit to [William](https://opengameart.org/content/donut-pack) for the donut icons
+- Websites I used for syntax references are:
+ 	- [w3schools](https://www.w3schools.com/)
+ 	- [MDN Web Docs](https://developer.mozilla.org/en-US/)
 
 ### Creating a wireframe 
 
 > The wireframes are the floor plan for your website, creating a vessel for which design and content can flow into.
 
-- First step is to draw up a rough sketch of how my final design will look like. This will help me to break down step by step on how the logic of my game will be. 
+1. First step is to draw up a rough sketch of how my final design will look like. This will help me to break down step by step on how the logic of my game will be. 
 
-- Second step is to identify where I need to place my divs in my HTML and also consider whether or not I should use bootstrap(?) (i.e having my donut box as a background image so that I can place my selected donuts on top of the box)
+2. Second step is to identify where I need to place my divs in my HTML and also consider whether or not I should use bootstrap(?) (i.e having my donut box as a background image so that I can place my selected donuts on top of the box)
 
-- Third step is to identify what javascript syntax I would need to use (i.e storing my donuts in an array as a string)
+3. Third step is to identify what javascript syntax I would need to use (i.e storing my donuts in an array as a string)
 
-- Fourth step is to do the logic aspect of the game.
+4. Fourth step is to do the logic aspect of the game.
 
 ### MVP
 
