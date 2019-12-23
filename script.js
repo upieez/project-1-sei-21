@@ -33,14 +33,18 @@ addDonutToContainer();
 
 var checkForCorrectAmt = function(){
 
-var donutArray = document.querySelectorAll(".donut-array > .donut")
-var donutBox = document.querySelectorAll(".donut-takeaway > .donut")
+var firstArray = document.querySelectorAll(".donut-objective > .donut-array")[0];
+var donutArray = firstArray.querySelectorAll(".donut-array > .donut");
+var donutBox = document.querySelectorAll(".donut-takeaway > .donut");
 
 //----If statement to check the correct amount in box----
  if (donutArray.length === donutBox.length){
     alert("correct!"); // I can create a function here to check if the donuts inside are all the same in the array
+    clearDonut();
     } else {
         alert("wrong!");
+        document.querySelector(".donut-takeaway").innerHTML="";
+        count = 0;
     }
 };
 
@@ -69,7 +73,15 @@ var generateRandomDonut = function(){
     donutObjective.appendChild(donutArray);
 }
 
+setInterval(generateRandomDonut, 5000); //setInterval to keep adding more objective to the game
 
-setInterval(generateRandomDonut, 5000);
+//Can set a counter to generate how many times you want. If counter goes beyond a certain number, stop generating i.e global variable
 
-//----Create a setinterval function to keep generating more array----
+//----Clear the donut objective when correct----
+
+var clearDonut = function(){
+    var clear = document.querySelector(".donut-objective")
+    clear.removeChild(document.querySelector(".donut-array"));
+    document.querySelector(".donut-takeaway").innerHTML="";
+    count = 0;
+}
