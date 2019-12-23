@@ -38,7 +38,7 @@ var donutBox = document.querySelectorAll(".donut-takeaway > .donut")
 
 //----If statement to check the correct amount in box----
  if (donutArray.length === donutBox.length){
-    alert("correct!"); // I can create a function here to check if the donuts inside are all the same
+    alert("correct!"); // I can create a function here to check if the donuts inside are all the same in the array
     } else {
         alert("wrong!");
     }
@@ -53,7 +53,7 @@ buttonChecker();
 
 //----Generate Random Donut Amount Function----
 
-var generateRandomArray = function(){
+var generateRandomDonut = function(){
     var randomNumber = Math.round(2 + Math.random() * 1) // only till 3 atm
     var donutObjective = document.querySelector(".donut-objective");
     var donutArray = document.createElement("div");
@@ -69,4 +69,7 @@ var generateRandomArray = function(){
     donutObjective.appendChild(donutArray);
 }
 
-generateRandomArray();
+
+setInterval(generateRandomDonut, 5000);
+
+//----Create a setinterval function to keep generating more array----
