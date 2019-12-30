@@ -52,9 +52,13 @@ Match the donut into the donut box from the objective and send out the order. Ma
 - Clear the donut array whenever it is correct
 - Format the style to make it look slightly more visually appealing
 
+#### Stage 3
+
+- Able to select different types of donut
+- Able to generate different types of donut in the objective
+- Able to check and submit that the types of donut and number is correct
+
 #### Further ideas (in progress)
-- Generate random donut icons in the array
-- Display a list different donuts in the donut selection
 - Have a function to drag it instead of clicking
 - Animation(?)
 - Do a timer function for the game
