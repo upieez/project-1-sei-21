@@ -1,5 +1,5 @@
 body {
-	background-color: #FEC8D8;
+	background-image: linear-gradient(to right,#FEC8D8,#87CEEB);
 }
 
 /*.container {
@@ -15,6 +15,7 @@ body {
 
 .donut-objective {
 /*	border: 2px solid blue;*/
+	height: 179px;
   border: 3px solid transparent;
   border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
   border-image-slice: 1;
@@ -35,6 +36,8 @@ body {
 }
 
 .donut-container{
+	width: 1000px;
+	margin-top: 15px;
 	border: 5px solid yellow;
 	padding-right: 1px;
 	display: inline-block;
@@ -43,6 +46,9 @@ body {
 
 .donut-box{
 	border: 5px solid purple;
+	background-image: url("images/box/donut_box.png");
+	background-size: 250px;
+	background-repeat: no-repeat;
 /*	background-color: none;*/
 	width: 300px;
 	height: 300px;
@@ -51,8 +57,8 @@ body {
 
 .donut-takeaway{
 	border: 5px solid black;
-	width: 150px;
-	height: 105px;
+	width: 155px;
+	height: 128px;
 	display: inline-block;
 	padding: 5px;
 	padding-right: -5px;
@@ -66,7 +72,7 @@ body {
 }
 
 .donut-sidebar{
-	border:5px solid green;
+	/*border:5px solid green;*/
 	display: inline-block;
 	width: 200px;
 	height: 460px;
@@ -74,13 +80,14 @@ body {
 }
 
 .donut-selection{
+	margin-top: 15px;
 	border: 5px solid brown;
 	width: 190px;
 	height: 395px;
 }
 
 .donut-clicker{
-	border: 5px solid grey;
+	/*border: 5px solid grey;*/
 	text-align: center;
 }
 
@@ -91,21 +98,22 @@ body {
 }
 
 .display-info{
-	border: 5px solid pink;
+	border: 5px solid black;
 	text-align: center;
 }
 
 #player-name{
-	border: 1px solid orange;
+	/*border: 1px solid orange;*/
 	display: inline-block;
 }
 
 #player-points{
-	border: 5px solid teal;
+	/*border: 5px solid teal;*/
 	display: inline-block;
 }
 
 button {
+	font-size: 24px;
 	position: relative;
 	top: 60%;
 	left: 40%;
