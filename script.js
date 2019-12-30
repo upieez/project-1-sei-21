@@ -3,7 +3,7 @@ console.log("Donut game project!")
 //----Image Sources in a variable----
 var plainDonut = "<img src='images/donuts/plain/plain_donut.png'>"
 var chocDonut = "<img src='images/donuts/brown/brown_donut_8.png'>"
-var randomDonut = [plainDonut, chocDonut] //grabbing random donuts probably can stor it in an object?
+var randomDonut = [plainDonut, chocDonut] //grabbing random donuts probably can store it in an object?
 
 
 //----Global Variable----
@@ -19,15 +19,17 @@ var addDonut = function(){
         var donutBox = document.querySelector(".donut-takeaway");
         var div = document.createElement("div");
         div.classList.add("donut");
-        div.innerHTML = plainDonut;
+        div.innerHTML = this.innerHTML;
         donutBox.appendChild(div);
     }
 }
 
 //addDonut function runs when click on donut image
 var addDonutToContainer = function(){
-var clicker = document.querySelector(".donut-clicker > .donut")
-clicker.addEventListener("click", addDonut);
+var clicker = document.querySelectorAll(".donut-clicker > .donut")
+for (var i = 0; i < 2; i++){
+    clicker[i].addEventListener("click", addDonut);
+    }
 };
 
 addDonutToContainer();
@@ -64,7 +66,7 @@ buttonChecker();
 var generateRandomDonutArray = function(){
     var counter = document.querySelector(".donut-objective").childElementCount
     if (counter < 5){
-    var randomNumber = Math.round(1 + Math.random() * 6) // only till 3 atm
+    var randomNumber = Math.round(Math.random() * 6)
     var donutObjective = document.querySelector(".donut-objective");
     var donutArray = document.createElement("div");
     donutArray.classList.add("donut-array");
@@ -80,7 +82,7 @@ var generateRandomDonutArray = function(){
     }
 }
 
-// setInterval(generateRandomDonutArray, 5000); //setInterval to keep adding more objective to the game
+setInterval(generateRandomDonutArray, 5000); //setInterval to keep adding more objective to the game
 
 //----Clear the donut objective when correct----
 
