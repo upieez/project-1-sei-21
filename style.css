@@ -74,6 +74,11 @@
 
 .donut-clicker{
 	border: 5px solid grey;
+	text-align: center;
+}
+
+.donut-clicker .donut{
+	display: inline-block;
 }
 
 .display-info{
@@ -92,8 +97,8 @@
 }
 
 button {
-	position: absolute;
-	top: 80%;
+	position: relative;
+	top: 60%;
 	left: 40%;
 }
 
