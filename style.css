@@ -1,22 +1,29 @@
-.container {
-	border: 5px solid black;
+body {
+	background-color: #FEC8D8;
 }
 
+/*.container {
+	border: 5px solid black;
+}*/
+
 .donut {
-	border: 1px solid fuchsia;
+/*	border: 1px solid fuchsia;*/
 	height: 40px;
 	width: 40px;
 	font-size: 10px;
 }
 
 .donut-objective {
-	border: 5px solid blue;
+/*	border: 2px solid blue;*/
+  border: 3px solid transparent;
+  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  border-image-slice: 1;
+	display: flex;
 }
 
 .donut-array{
-	border: 5px solid red;
+	border: 5px solid #FFE5B4;
 	width: 155px;
-	height: 100px;
 	display: inline-block;
 	padding: 15px 0 0 10px;
 	border-radius: 30px;
@@ -24,7 +31,7 @@
 }
 
 .donut-array .donut{
-	display: inline-block;
+	display: inline-flex;
 }
 
 .donut-container{
@@ -79,6 +86,8 @@
 
 .donut-clicker .donut{
 	display: inline-block;
+	padding: 10px;
+
 }
 
 .display-info{
@@ -103,6 +112,6 @@ button {
 }
 
 img {
-	height: 40px;
-	width: 40px;
+	height: 60px;
+	width: 60px;
 }
