@@ -2,25 +2,31 @@ console.log("Donut game project!")
 
 //----Image Sources in a variable----
 var plainDonut = "<img src='images/donuts/plain/plain_donut.png'>"
-var chocDonut = "<img src='images/donuts/brown/brown_donut_8.png'>"
+var chocDonut = "<img src='images/donuts/brown/brown_donut_9.png'>"
+var chocDonut2 = "<img src='images/donuts/brown/brown_donut_2.png'>"
 var strawDonut = "<img src='images/donuts/red/red_donut_4.png'>"
 var blueberryDonut = "<img src='images/donuts/blue/blue_donut_6.png'>"
 var appleDonut = "<img src='images/donuts/green/green_donut_2.png'>"
 var cherryDonut = "<img src='images/donuts/pink/pink_donut_3.png'>"
-var randomDonut = [plainDonut, chocDonut, strawDonut, blueberryDonut, appleDonut, cherryDonut] //grabbing random donuts probably can store it in an object?
+var lemonDonut = "<img src='images/donuts/yellow/yellow_donut_11.png'>"
+var grapeDonut = "<img src='images/donuts/purple/purple_donut_7.png'>"
+var randomDonut = []
 
+
+//randomly take 6 from the donut options and push it in the randomDonut
+
+var randomOptions = function(){
+    var donutOptions = [plainDonut, chocDonut, chocDonut2, strawDonut, blueberryDonut, appleDonut, cherryDonut, lemonDonut, grapeDonut]
+    while (randomDonut.length < 6){
+        var randomNumber = Math.round(Math.random()*6);
+        randomDonut.push(donutOptions[randomNumber])
+    }
+}
 
 //----Global Variable----
 var count = 0;
 var points = 0;
 
-//----Generating Random Color Donuts----
-
-var randomColors = function(){
-    var randomColorDonuts = ["brown","blue","red","yellow","green","purple","pink"];
-    var i = Math.round(Math.random()*7);
-    return "<img src='images/donuts/"+randomColorDonuts[i]+"/"+randomColorDonuts[i]+"_donut_"+Math.round(1+Math.random()*9)+".png'>"
-};
 
 //----Input Donut Function to Donut Box ----
 
@@ -74,8 +80,7 @@ var checkForCorrectDonuts = function(){
 //If statement to check the correct amount in box
  if (donutArray.length === donutBox.length){
     checkForCorrectDonuts();
-    console.log("correct amount!"); // I can create a function here to check if the donuts inside are all the same in the array
-    // clearDonut();
+    console.log("correct amount!");
     } else {
         console.log("wrong amount!");
         document.querySelector(".donut-takeaway").innerHTML="";
@@ -100,6 +105,7 @@ var generateRandomDonutArray = function(){
     var donutObjective = document.querySelector(".donut-objective");
     var donutArray = document.createElement("div");
     donutArray.classList.add("donut-array");
+    randomOptions();
         // for loop to print out random amount of donut into the donut array
         for (var i = 0; i < randomNumber; i++){
             var donut = document.querySelector(".donut-array");
@@ -110,6 +116,7 @@ var generateRandomDonutArray = function(){
             }
             donutObjective.appendChild(donutArray);
     }
+    randomDonut = [];
 }
 
 setInterval(generateRandomDonutArray, 5000); //setInterval to keep adding more objective to the game
@@ -122,3 +129,11 @@ var clearDonut = function(){
     document.querySelector(".donut-takeaway").innerHTML="";
     count = 0;
 }
+
+//----Generating Random Color Donuts----
+// //for future use
+// var randomColors = function(){
+//     var randomColorDonuts = ["brown","blue","red","yellow","green","purple","pink"];
+//     var i = Math.round(Math.random()*7);
+//     return "<img src='images/donuts/"+randomColorDonuts[i]+"/"+randomColorDonuts[i]+"_donut_"+Math.round(1+Math.random()*9)+".png'>"
+// };
