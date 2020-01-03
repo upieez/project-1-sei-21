@@ -3,11 +3,16 @@ console.log("Donut game project!")
 //----Image Sources in a variable----
 var plainDonut = "<img src='images/donuts/plain/plain_donut.png'>"
 var chocDonut = "<img src='images/donuts/brown/brown_donut_8.png'>"
-var randomDonut = [plainDonut, chocDonut, plainDonut, plainDonut, chocDonut, chocDonut] //grabbing random donuts probably can store it in an object?
+var strawDonut = "<img src='images/donuts/red/red_donut_4.png'>"
+var blueberryDonut = "<img src='images/donuts/blue/blue_donut_6.png'>"
+var appleDonut = "<img src='images/donuts/green/green_donut_2.png'>"
+var cherryDonut = "<img src='images/donuts/pink/pink_donut_3.png'>"
+var randomDonut = [plainDonut, chocDonut, strawDonut, blueberryDonut, appleDonut, cherryDonut] //grabbing random donuts probably can store it in an object?
 
 
 //----Global Variable----
 var count = 0;
+var points = 0;
 
 //----Generating Random Color Donuts----
 
@@ -53,10 +58,14 @@ var checkForCorrectDonuts = function(){
     for (var i = 0; i < donutArray.length; i++){
         if(donutArray[i].innerHTML === donutBox[i].innerHTML){
             console.log("correct type of donut!");
+            points += 100;
+            document.querySelector("#player-points").textContent = points
         } else {
             console.log("wrong type of donut!")
             document.querySelector(".donut-takeaway").innerHTML="";
             count = 0;
+            points -= 75;
+            document.querySelector("#player-points").textContent = points
         }
     }
     clearDonut();
@@ -96,7 +105,7 @@ var generateRandomDonutArray = function(){
             var donut = document.querySelector(".donut-array");
             var donutDiv = document.createElement("div");
             donutDiv.classList.add("donut");
-            donutDiv.innerHTML = randomColors();
+            donutDiv.innerHTML = randomDonut[i];
             donutArray.appendChild(donutDiv);
             }
             donutObjective.appendChild(donutArray);
