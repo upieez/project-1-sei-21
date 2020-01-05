@@ -45,7 +45,7 @@ addDonutToContainer();
 
 //----Generate Random Types of Donut in Objective----
 
-var randomOptions = function(){
+var randomDonuts = function(){
     var donutOptions = [plainDonut, chocDonut, chocDonut2, strawDonut, blueberryDonut, appleDonut, cherryDonut, lemonDonut, grapeDonut]
     while (randomDonut.length < 6){
         var randomNumber = Math.round(Math.random()* 8);
@@ -85,6 +85,12 @@ var checkForCorrectDonuts = function(){
     } else {
         console.log("wrong amount!");
         document.querySelector(".donut-takeaway").innerHTML="";
+        document.querySelector(".donut-box").classList.add("shake");
+        document.querySelector(".donut-box").classList.add("animated");
+        setTimeout(function(){
+        document.querySelector(".donut-box").classList.remove("shake");
+        document.querySelector(".donut-box").classList.remove("animated");
+        }, 2000)
         count = 0;
     }
 };
@@ -106,7 +112,9 @@ var generateRandomDonutArray = function(){
     var donutObjective = document.querySelector(".donut-objective");
     var donutArray = document.createElement("div");
     donutArray.classList.add("donut-array");
-    randomOptions(); // call my random donuts function
+    donutArray.classList.add("slideInRight");
+    donutArray.classList.add("animated");
+    randomDonuts(); // call my random donuts function
         // for loop to print out random amount of donut into the donut array
         for (var i = 0; i < randomNumber; i++){
             var donut = document.querySelector(".donut-array");
@@ -120,7 +128,7 @@ var generateRandomDonutArray = function(){
     randomDonut = []; //reverting back to an empty array
 }
 
-setInterval(generateRandomDonutArray, 2500); //setInterval to keep adding more objective to the game
+setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
 
 //----Clear the donut objective when correct----
 
@@ -131,7 +139,7 @@ var clearDonut = function(){
     count = 0;
 }
 
-//----Timer function for when the game ends----
+//----Gameover function for when the game ends----
 
 var gameOver = function(){
     var mainBody = document.querySelector("body")
@@ -139,10 +147,10 @@ var gameOver = function(){
     var gameEnd = document.createElement("div");
     gameEnd.classList.add("gameEnd");
     mainBody.appendChild(gameEnd)
-    document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + "<br/><br/>" + "YOUR POINTS IS: " + points;
+    document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br><div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
 }
 
-setTimeout(gameOver,5000)
+// setTimeout(gameOver,155000)
 
 
 //----Generating Random Color Donuts----
