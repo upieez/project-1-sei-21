@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Emilys+Candy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="animate.css">
     <title>Match Donut Game!</title>
 </head>
 <body>
 
-<div class="container"> <!-- START OF CONTAINER DIV -->
+<div class="game-start">
+<h1>Match The Donuts!</h1>
+    <div class="main-menu">
+        <div>
+            <div class="start-donut"><img src="images/donuts/pink/pink_donut_7.png"></div>
+            <div>Start Game!</div>
+        </div>
+        <div>
+            <div class="readme-donut"><img src="images/donuts/blue/blue_donut_5.png"></div>
+            <div>Instructions!</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="display:none"> <!-- START OF CONTAINER DIV -->
 
 <!-- This div is to hold my donut objectives for the player to fulfill -->
 <div class="donut-objective"> <!-- START OF DONUT OBJECTIVE DIV -->
@@ -66,8 +82,8 @@
     </div> <!-- END OF DONUT SELECTION DIV -->
 
     <div class = "display-info">
-        <div id="player-name">NAME:</div>
-        <div id="player-points">POINTS</div>
+        <div id="player-name">POINTS:</div>
+        <div id="player-points">0</div>
     </div> <!-- END OF DISPLAY INFO DIV -->
 
 </div> <!-- END OF DONUT SIDEBAR DIV -->
