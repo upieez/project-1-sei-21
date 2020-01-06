@@ -11,10 +11,11 @@
 
 - Good free game art I took is from [OpenGameArt](https://opengameart.org/) & [freepik](https://www.freepik.com/)
  	- Credit to [William](https://opengameart.org/content/donut-pack) for the donut icons
- 	- Credit to [upkylak](https://www.freepik.com/free-vector/white-blank-cardboard-box-with-flip-top-realistic_6387612.htm) for the box background
+ 	- Credit to [upkylak](https://www.freepik.com/free-vector/white-blank-cardboard-box-with-flip-top-realistic_6387612.htm) for the box
 - Websites I used for syntax references are:
  	- [w3schools](https://www.w3schools.com/)
  	- [MDN Web Docs](https://developer.mozilla.org/en-US/)
+- Fonts Family I took is from [Google Fonts](https://fonts.google.com/?query=candy&selection.family=Emilys+Candy)
 
 ### Creating a wireframe 
 
@@ -59,8 +60,13 @@ Match the donut into the donut box from the objective and send out the order. Ma
 - Able to generate different types of donut in the objective
 - Able to check and submit that the types of donut and number is correct
 
+#### Stage 4
+- Create a gameover with a restart button screen
+- Create a startgame screen
+
 #### Further ideas (in progress)
 - Have a function to drag it instead of clicking
 - Animation(?)
 - Do a timer function for the game
-- 
+- Create a main menu page
+- Create a difficulty page
