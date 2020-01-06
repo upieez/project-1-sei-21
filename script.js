@@ -48,6 +48,8 @@ var gameStart = function(){
     startDonut.addEventListener("click", function(){
         containerDiv.style.display = "none";
         container.style.removeProperty("display");
+        document.querySelector(".donut-box").classList.add("slideInLeft");
+        document.querySelector(".donut-box").classList.add("animated");
         startTimer(); // start the array timer
         gameOverTimer(); // game end timer countdown
     });
