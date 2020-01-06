@@ -7,6 +7,27 @@ body {
 	border: 5px solid black;
 }*/
 
+.game-start{
+	font-size: 32px;
+	text-align: center;
+}
+
+.main-menu{
+	display: flex;
+	justify-content: space-around;
+}
+
+.start-donut, .readme-donut{
+	display: inline-flex;
+	margin-top: 80px;
+}
+
+.game-start img{
+	padding: 20px;
+	width: 350px;
+	height: 350px;
+}
+
 .donut {
 	height: 40px;
 	width: 40px;
@@ -77,21 +98,23 @@ body {
 .donut-sidebar{
 	/*border:5px solid green;*/
 	display: inline-block;
-	width: 200px;
+	width: 215px;
 	height: 460px;
 	float: right;
+
 }
 
 .donut-selection{
 	margin-top: 15px;
 	border: 5px solid brown;
-	background-color: grey;
-	width: 190px;
+	background-color: #DEB887;
+	width: 205px;
 	height: 395px;
 }
 
 .donut-clicker{
 	text-align: center;
+	width: 190px;
 }
 
 .donut-clicker .donut{
