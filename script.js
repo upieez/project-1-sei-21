@@ -50,6 +50,10 @@ var gameStart = function(){
         container.style.removeProperty("display");
         document.querySelector(".donut-box").classList.add("slideInLeft");
         document.querySelector(".donut-box").classList.add("animated");
+        setTimeout(function(){
+        document.querySelector(".donut-box").classList.remove("slideInLeft");
+        document.querySelector(".donut-box").classList.remove("animated");
+        }, 3000)
         startTimer(); // start the array timer
         gameOverTimer(); // game end timer countdown
     });
@@ -182,7 +186,11 @@ var startTimer = function(){
 
 var clearDonut = function(){
     var clear = document.querySelector(".donut-objective")
-    clear.removeChild(document.querySelector(".donut-array"));
+    document.querySelector(".donut-array").classList.add("slideOutUp");
+    document.querySelector(".donut-array").classList.add("animated");
+    setTimeout(function(){
+        clear.removeChild(document.querySelector(".donut-array"));
+    }, 1000)
     document.querySelector(".donut-takeaway").innerHTML="";
     count = 0;
 }
