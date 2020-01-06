@@ -20,6 +20,7 @@ body {
 .start-donut, .readme-donut{
 	display: inline-flex;
 	margin-top: 80px;
+	cursor: pointer;
 }
 
 .game-start img{
@@ -44,12 +45,17 @@ body {
 }
 
 .donut-array{
+	background-color: rgba(255,229,180,0.5);
 	border: 5px solid #FFE5B4;
 	width: 155px;
 	display: inline-block;
-	padding: 15px 0 0 10px;
+	padding: 10px 0 0 10px;
 	border-radius: 30px;
-	margin: 10px auto;
+	margin-top: 10px;
+	margin-left: 40px;
+	margin-right: 60px;
+	margin-bottom: 10px;
+	float: left;
 }
 
 .donut-array .donut{
@@ -120,7 +126,6 @@ body {
 .donut-clicker .donut{
 	display: inline-block;
 	padding: 10px;
-
 }
 
 .display-info{
@@ -163,6 +168,16 @@ button:hover{
 
 .gameOver{
 	font-size: 32px;
+	border: 1px solid black;
+	padding: 15px;
+	width: 20%;
+	display: inline-block;
+	margin: 25px;
+}
+
+.gameOver:hover{
+	background-color: #4CAF50;
+	cursor: pointer;
 }
 
 /* removes the blue outline on click */
