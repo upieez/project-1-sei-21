@@ -17,27 +17,40 @@ var randomDonut = []
 //----Global Variable----
 var count = 0;
 var points = 0;
-var startGame = false;
 
 // ----Starting the game with the overlay----
 
 var gameStart = function(){
     var containerDiv = document.querySelector(".game-start");
     var container = document.querySelector(".container");
-    document.querySelector(".start-donut").addEventListener("mouseover",function(){
-    document.querySelector(".start-donut").classList.add("jello");
-    document.querySelector(".start-donut").classList.add("animated");
-    setTimeout(function(){
-    document.querySelector(".start-donut").classList.remove("jello");
-    document.querySelector(".start-donut").classList.remove("animated");
-    }, 2000)
-    })
-    document.querySelector(".start-donut").addEventListener("click", function(){
+    var startDonut = document.querySelector(".start-donut");
+    var readMeDonut = document.querySelector(".readme-donut");
+
+    startDonut.addEventListener("mouseover",function(){
+        startDonut.classList.add("jello");
+        startDonut.classList.add("animated");
+        });
+    readMeDonut.addEventListener("mouseover",function(){
+        readMeDonut.classList.add("jello");
+        readMeDonut.classList.add("animated");
+        });
+    startDonut.addEventListener("mouseout", function(){
+        startDonut.classList.remove("jello");
+        startDonut.classList.remove("animated");
+        });
+    readMeDonut.addEventListener("mouseout",function(){
+        readMeDonut.classList.remove("jello");
+        readMeDonut.classList.remove("animated");
+        });
+    startDonut.addEventListener("click", function(){
         containerDiv.style.display = "none";
         container.style.removeProperty("display");
-        startGame = true;
         startTimer(); // start the array timer
-    })
+        setTimeout(gameOver,155000) // game end timer countdown
+    });
+    readMeDonut.addEventListener("click", function(){
+
+    });
 }
 
 gameStart()
@@ -153,6 +166,7 @@ var generateRandomDonutArray = function(){
     randomDonut = []; //reverting back to an empty array
 }
 
+//timer function to be called when game starts
 var startTimer = function(){
     setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
 }
@@ -176,8 +190,6 @@ var gameOver = function(){
     mainBody.appendChild(gameEnd)
     document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br><div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
 }
-
-setTimeout(gameOver,155000)
 
 
 //----Generating Random Color Donuts----
