@@ -16,6 +16,7 @@ var randomDonut = []
 //----Global Variable----
 var count = 0;
 var points = 0;
+var timer = 45;
 
 // ----Starting the game with the overlay----
 
@@ -187,18 +188,44 @@ var clearDonut = function(){
 //----Gameover function for when the game ends----
 
 var gameOver = function(){
+    clearInterval(); // clears the timer function for making donuts
     var mainBody = document.querySelector("body")
     mainBody.innerHTML="";
     var gameEnd = document.createElement("div");
     gameEnd.classList.add("gameEnd");
-    mainBody.appendChild(gameEnd)
-    document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br><div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
+    mainBody.appendChild(gameEnd);
+    document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br>" + "<div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
+    document.querySelector(".gameOver").addEventListener("click", function(){
+        window.location.reload(true);
+    })
 }
 
 // gamer over timer to start when user clicks on begin game
 var gameOverTimer = function(){
-    setTimeout(gameOver,155000); // runs the game over screen when timer reaches specified timing
+
+    //creates the clock timer at the bottom of the sidebar
+    var clockSideBar = document.querySelector(".donut-sidebar");
+    var createClockTimerDiv = document.createElement("div");
+    createClockTimerDiv.classList.add("timer");
+    clockSideBar.appendChild(createClockTimerDiv);
+    var createClockTimer = document.querySelector(".timer");
+    var createClockTimerDivDiv = document.createElement("div");
+    createClockTimerDivDiv.setAttribute("id","countdown");
+    createClockTimer.appendChild(createClockTimerDivDiv);
+
+    setTimeout(gameOver,47000); // runs the game over screen when timer reaches specified timing
+    setInterval(clock,1000);
 }
+
+// ---- Countdown timer ----
+
+var clock = function(){
+    var time = document.querySelector("#countdown");
+    time.textContent = timer + " secs";
+    timer--;
+}
+
+
 
 
 //----Generating Random Color Donuts----
