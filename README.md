@@ -16,6 +16,7 @@
  	- [w3schools](https://www.w3schools.com/)
  	- [MDN Web Docs](https://developer.mozilla.org/en-US/)
 - Fonts Family I took is from [Google Fonts](https://fonts.google.com/?query=candy&selection.family=Emilys+Candy)
+- Animation css I took is from [Daniel Eden](https://daneden.github.io/animate.css/)
 
 ### Creating a wireframe 
 
@@ -70,3 +71,4 @@ Match the donut into the donut box from the objective and send out the order. Ma
 - Do a timer function for the game
 - Create a main menu page
 - Create a difficulty page
+- Store highscore points
