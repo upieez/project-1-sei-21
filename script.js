@@ -13,7 +13,6 @@ var grapeDonut = "<img src='images/donuts/purple/purple_donut_7.png'>"
 var randomDonut = []
 
 
-
 //----Global Variable----
 var count = 0;
 var points = 0;
@@ -26,6 +25,7 @@ var gameStart = function(){
     var startDonut = document.querySelector(".start-donut");
     var readMeDonut = document.querySelector(".readme-donut");
 
+    // event listener for mouseover to add animation
     startDonut.addEventListener("mouseover",function(){
         startDonut.classList.add("jello");
         startDonut.classList.add("animated");
@@ -42,11 +42,13 @@ var gameStart = function(){
         readMeDonut.classList.remove("jello");
         readMeDonut.classList.remove("animated");
         });
+
+    // event listener for when click starts game or go to instruction page
     startDonut.addEventListener("click", function(){
         containerDiv.style.display = "none";
         container.style.removeProperty("display");
         startTimer(); // start the array timer
-        setTimeout(gameOver,155000) // game end timer countdown
+        gameOverTimer(); // game end timer countdown
     });
     readMeDonut.addEventListener("click", function(){
 
@@ -64,6 +66,8 @@ var addDonut = function(){
         var donutBox = document.querySelector(".donut-takeaway");
         var div = document.createElement("div");
         div.classList.add("donut");
+        div.classList.add("bounceInRight");
+        div.classList.add("animated");
         div.innerHTML = ((this.innerHTML).trim());
         donutBox.appendChild(div);
     }
@@ -189,6 +193,11 @@ var gameOver = function(){
     gameEnd.classList.add("gameEnd");
     mainBody.appendChild(gameEnd)
     document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br><div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
+}
+
+// gamer over timer to start when user clicks on begin game
+var gameOverTimer = function(){
+    setTimeout(gameOver,155000); // runs the game over screen when timer reaches specified timing
 }
 
 
