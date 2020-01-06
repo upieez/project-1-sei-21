@@ -17,7 +17,30 @@ var randomDonut = []
 //----Global Variable----
 var count = 0;
 var points = 0;
+var startGame = false;
 
+// ----Starting the game with the overlay----
+
+var gameStart = function(){
+    var containerDiv = document.querySelector(".game-start");
+    var container = document.querySelector(".container");
+    document.querySelector(".start-donut").addEventListener("mouseover",function(){
+    document.querySelector(".start-donut").classList.add("jello");
+    document.querySelector(".start-donut").classList.add("animated");
+    setTimeout(function(){
+    document.querySelector(".start-donut").classList.remove("jello");
+    document.querySelector(".start-donut").classList.remove("animated");
+    }, 2000)
+    })
+    document.querySelector(".start-donut").addEventListener("click", function(){
+        containerDiv.style.display = "none";
+        container.style.removeProperty("display");
+        startGame = true;
+        startTimer(); // start the array timer
+    })
+}
+
+gameStart()
 
 //----Input Donut Function to Donut Box ----
 
@@ -91,6 +114,8 @@ var checkForCorrectDonuts = function(){
         document.querySelector(".donut-box").classList.remove("shake");
         document.querySelector(".donut-box").classList.remove("animated");
         }, 2000)
+        points -= 100;
+        document.querySelector("#player-points").textContent = points
         count = 0;
     }
 };
@@ -128,7 +153,9 @@ var generateRandomDonutArray = function(){
     randomDonut = []; //reverting back to an empty array
 }
 
-setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
+var startTimer = function(){
+    setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
+}
 
 //----Clear the donut objective when correct----
 
@@ -150,7 +177,7 @@ var gameOver = function(){
     document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br><div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
 }
 
-// setTimeout(gameOver,155000)
+setTimeout(gameOver,155000)
 
 
 //----Generating Random Color Donuts----
