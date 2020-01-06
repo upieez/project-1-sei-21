@@ -141,6 +141,14 @@ body {
 	display: inline-block;
 }
 
+.timer{
+	text-align: center;
+}
+
+#countdown{
+	font-size: 24px;
+}
+
 .gameEnd{
 	font-size:62px;
 	text-align: center;
