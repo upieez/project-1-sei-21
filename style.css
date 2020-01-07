@@ -4,7 +4,7 @@ body {
 }
 
 /*.container {
-	border: 5px solid black;
+	display: 5px solid black;
 }*/
 
 .game-start{
@@ -181,6 +181,7 @@ button:hover{
 	width: 20%;
 	display: inline-block;
 	margin: 25px;
+	border-radius: 30px;
 }
 
 .gameOver:hover{
