@@ -18,13 +18,51 @@ var count = 0;
 var points = 0;
 var timer = 45;
 
+//----Main menu screen----
+
+var selectScreen = function(){
+    //donut header text
+    var createDiv = document.createElement("div");
+    createDiv.classList.add("game-start");
+    createDiv.innerHTML = "<h1>Match The Donuts!</h1>";
+    document.body.prepend(createDiv);
+    var mainMenu = document.createElement("div");
+    mainMenu.classList.add("main-menu")
+    createDiv.appendChild(mainMenu);
+
+    //start donut DOM
+    var container = document.createElement("div");
+    var startDonut = document.createElement("div");
+    startDonut.classList.add("start-donut");
+    startDonut.innerHTML = "<img src='images/donuts/pink/pink_donut_7.png'>";
+    var startDonutText = document.createElement("div");
+    startDonutText.innerHTML = "Start Game!"
+    container.appendChild(startDonut);
+    container.appendChild(startDonutText);
+    mainMenu.appendChild(container);
+
+    //instruction donut DOM
+    var container1 = document.createElement("div");
+    var instructionDonut = document.createElement("div");
+    instructionDonut.classList.add("readme-donut");
+    instructionDonut.innerHTML = "<img src='images/donuts/blue/blue_donut_5.png'>";
+    var instructionDonutText = document.createElement("div");
+    instructionDonutText.innerHTML = "Instructions!"
+    container1.appendChild(instructionDonut);
+    container1.appendChild(instructionDonutText);
+    mainMenu.appendChild(container1);
+}
+
 // ----Starting the game with the overlay----
 
 var gameStart = function(){
+    selectScreen();
+
     var containerDiv = document.querySelector(".game-start");
     var container = document.querySelector(".container");
     var startDonut = document.querySelector(".start-donut");
     var readMeDonut = document.querySelector(".readme-donut");
+    var createDiv = document.createElement("div");
 
     // event listener for mouseover to add animation
     startDonut.addEventListener("mouseover",function(){
@@ -58,7 +96,14 @@ var gameStart = function(){
         gameOverTimer(); // game end timer countdown
     });
     readMeDonut.addEventListener("click", function(){
-
+        document.body.removeChild(containerDiv);
+        createDiv.classList.add("game-start");
+        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct donuts and get the highest score! </br></br> Each correct donuts earns you 100 points </br></br> Each wrong donuts reduces your score by 75 </br></br> You only have 45 seconds to match as many donuts as you can!</br></br><div class='gameOver'>Understood!</div>";
+        document.body.prepend(createDiv);
+        document.querySelector(".gameOver").addEventListener("click",function(){
+            document.body.removeChild(document.querySelector(".game-start"));
+            gameStart();
+        })
     });
 }
 
@@ -77,6 +122,10 @@ var addDonut = function(){
         div.classList.add("animated");
         div.innerHTML = ((this.innerHTML).trim());
         donutBox.appendChild(div);
+        div.addEventListener("click",function(){
+            donutBox.removeChild(this);
+            count--;
+        })
     }
 }
 
@@ -234,8 +283,6 @@ var clock = function(){
     time.textContent = timer + " secs";
     timer--;
 }
-
-
 
 
 //----Generating Random Color Donuts----
