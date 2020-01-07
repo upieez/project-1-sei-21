@@ -63,10 +63,16 @@ Match the donut into the donut box from the objective and send out the order. Ma
 
 #### Stage 4
 - Create a gameover with a restart button screen
-- Create a startgame screen
+- Create a startgame screen with instructions
+- Animate the game
 
 #### Further ideas (in progress)
 - Have a function to drag it instead of clicking
 - Create a difficulty page
+- Each difficulty will have different amount of donut selection
+ 	- Easy will have 6 donuts to choose from and you only need to fill max of three donuts
+ 	- Medium will have 9 and fill up max 6 donuts
+ 	- Hard will have 12 donuts and fill up max 9 donuts
 - Store highscore points
-- Instead of creating a point system, change it to gain money instead and instead of having difficulty, you can progress the game by buying more donuts to add to your collection. Each donut you unlock can be sold for a higher price. The objective is to see if you can unlock all the donut by the end of the game and to get as much money as possible!
+- Play music in the game
+- Instead of creating a point system, change it to gain money instead and instead of having difficulty, you can progress the game by buying more donuts to add to your collection. Each donut you unlock can be sold to earn more money! The objective is to see if you can unlock all the donut by the end of the game and to get as much money as possible!
