@@ -106,7 +106,7 @@ var gameStart = function(){
     readMeDonut.addEventListener("click", function(){
         document.body.removeChild(containerDiv);
         createDiv.classList.add("game-start");
-        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct type and amount of donuts and get the highest score! </br></br> Each correct type of donuts earns you 100 points and adds a second to the timer </br></br> Each wrong type of donuts reduces your score by 75 </br></br> Wrong amount of donuts will make you lose 100 points and you have to redo again! </br></br> <div class='gameOver'>Back</div>";
+        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct type and amount of donuts and get the highest score! </br></br> Each correct type of donuts earns you 100 points and adds a second to the timer </br></br> Each wrong type of donuts reduces your score by 75 </br></br> Wrong amount of donuts will make you lose 100 points, reduces your time and you have to redo again! </br></br> <div class='gameOver'>Back</div>";
         document.body.prepend(createDiv);
         document.querySelector(".gameOver").addEventListener("click",function(){
             document.body.removeChild(document.querySelector(".game-start"));
@@ -197,7 +197,8 @@ var checkForCorrectDonuts = function(){
         document.querySelector(".donut-box").classList.remove("animated");
         }, 2000)
         points -= 100;
-        document.querySelector("#player-points").textContent = points
+        document.querySelector("#player-points").textContent = points;
+        timer -= 5;
         count = 0;
     }
 };
@@ -280,6 +281,8 @@ var gameOverTimer = function(){
     var createClockTimerDivDiv = document.createElement("div");
     createClockTimerDivDiv.setAttribute("id","countdown");
     createClockTimer.appendChild(createClockTimerDivDiv);
+
+    // runs the clock function every second
     intervalClockObject = setInterval(clock,1000);
 }
 
