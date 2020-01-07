@@ -23,6 +23,8 @@ var randomDonut = []
 var count = 0;
 var points = 0;
 var timer = 45;
+var intervalClockObject;
+var intervalDonutObject;
 
 //----Main menu screen----
 
@@ -168,6 +170,7 @@ var checkForCorrectDonuts = function(){
         if(donutArray[i].innerHTML === donutBox[i].innerHTML){
             console.log("correct type of donut!");
             points += 100;
+            timer += 1;
             document.querySelector("#player-points").textContent = points
         } else {
             console.log("wrong type of donut!")
@@ -234,7 +237,7 @@ var generateRandomDonutArray = function(){
 
 //timer function to be called when game starts
 var startTimer = function(){
-    setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
+    intervalDonutObject = setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
 }
 
 //----Clear the donut objective when correct----
@@ -252,7 +255,8 @@ var clearDonut = function(){
 //----Gameover function for when the game ends----
 
 var gameOver = function(){
-    clearInterval(); // clears the timer function for making donuts
+    clearInterval(intervalClockObject);
+    clearInterval(intervalDonutObject);
     var mainBody = document.querySelector("body")
     mainBody.innerHTML="";
     var gameEnd = document.createElement("div");
@@ -276,17 +280,19 @@ var gameOverTimer = function(){
     var createClockTimerDivDiv = document.createElement("div");
     createClockTimerDivDiv.setAttribute("id","countdown");
     createClockTimer.appendChild(createClockTimerDivDiv);
-
-    setTimeout(gameOver,47000); // runs the game over screen when timer reaches specified timing
-    setInterval(clock,1000);
+    intervalClockObject = setInterval(clock,1000);
 }
 
 // ---- Countdown timer ----
 
 var clock = function(){
     var time = document.querySelector("#countdown");
-    time.textContent = timer + " secs";
     timer--;
+    time.textContent = timer + " secs";
+
+    if (timer === 0){
+        gameOver();// runs the game over screen when timer reaches specified timing
+    }
 }
 
 
