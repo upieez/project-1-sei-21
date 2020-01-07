@@ -86,10 +86,10 @@ var gameStart = function(){
     startDonut.addEventListener("click", function(){
         containerDiv.style.display = "none";
         container.style.removeProperty("display");
-        document.querySelector(".donut-box").classList.add("slideInLeft");
+        document.querySelector(".donut-box").classList.add("bounceInLeft");
         document.querySelector(".donut-box").classList.add("animated");
         setTimeout(function(){
-        document.querySelector(".donut-box").classList.remove("slideInLeft");
+        document.querySelector(".donut-box").classList.remove("bounceInLeft");
         document.querySelector(".donut-box").classList.remove("animated");
         }, 3000)
         startTimer(); // start the array timer
@@ -98,7 +98,7 @@ var gameStart = function(){
     readMeDonut.addEventListener("click", function(){
         document.body.removeChild(containerDiv);
         createDiv.classList.add("game-start");
-        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct donuts and get the highest score! </br></br> Each correct donuts earns you 100 points </br></br> Each wrong donuts reduces your score by 75 </br></br> You only have 45 seconds to match as many donuts as you can!</br></br><div class='gameOver'>Understood!</div>";
+        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct type and amount of donuts and get the highest score! </br></br> Each correct donuts earns you 100 points </br></br> Each wrong donuts reduces your score by 75 </br></br> Wrong amount of donuts will make you lose 100 points and you have to redo again! </br></br> You only have 45 seconds to match as many donuts as you can!</br></br> <div class='gameOver'>Back</div>";
         document.body.prepend(createDiv);
         document.querySelector(".gameOver").addEventListener("click",function(){
             document.body.removeChild(document.querySelector(".game-start"));
@@ -210,7 +210,7 @@ var generateRandomDonutArray = function(){
     var donutObjective = document.querySelector(".donut-objective");
     var donutArray = document.createElement("div");
     donutArray.classList.add("donut-array");
-    donutArray.classList.add("slideInRight");
+    donutArray.classList.add("bounceInRight");
     donutArray.classList.add("animated");
     randomDonuts(); // call my random donuts function
         // for loop to print out random amount of donut into the donut array
@@ -236,10 +236,9 @@ var startTimer = function(){
 var clearDonut = function(){
     var clear = document.querySelector(".donut-objective")
     document.querySelector(".donut-array").classList.add("slideOutUp");
-    document.querySelector(".donut-array").classList.add("animated");
     setTimeout(function(){
         clear.removeChild(document.querySelector(".donut-array"));
-    }, 1000)
+    }, 500)
     document.querySelector(".donut-takeaway").innerHTML="";
     count = 0;
 }
