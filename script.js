@@ -106,7 +106,7 @@ var gameStart = function(){
     readMeDonut.addEventListener("click", function(){
         document.body.removeChild(containerDiv);
         createDiv.classList.add("game-start");
-        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct type and amount of donuts and get the highest score! </br></br> Each correct donuts earns you 100 points </br></br> Each wrong donuts reduces your score by 75 </br></br> Wrong amount of donuts will make you lose 100 points and you have to redo again! </br></br> You only have 45 seconds to match as many donuts as you can!</br></br> <div class='gameOver'>Back</div>";
+        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct type and amount of donuts and get the highest score! </br></br> Each correct type of donuts earns you 100 points and adds a second to the timer </br></br> Each wrong type of donuts reduces your score by 75 </br></br> Wrong amount of donuts will make you lose 100 points and you have to redo again! </br></br> <div class='gameOver'>Back</div>";
         document.body.prepend(createDiv);
         document.querySelector(".gameOver").addEventListener("click",function(){
             document.body.removeChild(document.querySelector(".game-start"));
