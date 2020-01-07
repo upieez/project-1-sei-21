@@ -38,7 +38,7 @@
 
 ### Gameplay
 
-Match the donut into the donut box from the objective and send out the order. Match the correct amount to gain more money to buy more donuts and build your donut empire (further)
+Match the donut into the donut box from the objective and send out the order. Match the correct amount to gain points to and get the highest score!
 
 - - - -
 
@@ -67,8 +67,6 @@ Match the donut into the donut box from the objective and send out the order. Ma
 
 #### Further ideas (in progress)
 - Have a function to drag it instead of clicking
-- Animation(?)
-- Do a timer function for the game
-- Create a main menu page
 - Create a difficulty page
 - Store highscore points
+- Instead of creating a point system, change it to gain money instead and instead of having difficulty, you can progress the game by buying more donuts to add to your collection. Each donut you unlock can be sold for a higher price. The objective is to see if you can unlock all the donut by the end of the game and to get as much money as possible!
