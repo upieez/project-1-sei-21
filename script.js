@@ -10,6 +10,12 @@ var appleDonut = "<img src='images/donuts/green/green_donut_2.png'>"
 var cherryDonut = "<img src='images/donuts/pink/pink_donut_3.png'>"
 var lemonDonut = "<img src='images/donuts/yellow/yellow_donut_11.png'>"
 var grapeDonut = "<img src='images/donuts/purple/purple_donut_7.png'>"
+var cherryDonut = "<img src='images/donuts/red/red_donut_8.png'>"
+var passionDonut = "<img src='images/donuts/purple/purple_donut_12.png'>"
+var bananaDonut = "<img src='images/donuts/yellow/yellow_donut_8.png'>"
+var dragonDonut = "<img src='images/donuts/pink/pink_donut_2.png'>"
+var elderDonut = "<img src='images/donuts/blue/blue_donut_1.png'>"
+var pearDonut = "<img src='images/donuts/green/green_donut_3.png'>"
 var randomDonut = []
 
 
@@ -142,9 +148,9 @@ addDonutToContainer();
 //----Generate Random Types of Donut in Objective----
 
 var randomDonuts = function(){
-    var donutOptions = [plainDonut, chocDonut, chocDonut2, strawDonut, blueberryDonut, appleDonut, cherryDonut, lemonDonut, grapeDonut]
+    var donutOptions = [plainDonut, chocDonut, chocDonut2, strawDonut, blueberryDonut, appleDonut, cherryDonut, lemonDonut, grapeDonut, cherryDonut, passionDonut, bananaDonut, dragonDonut, elderDonut, pearDonut]
     while (randomDonut.length < 6){
-        var randomNumber = Math.round(Math.random()* 8);
+        var randomNumber = Math.round(Math.random()* 14);
         randomDonut.push(donutOptions[randomNumber])
     }
 }
