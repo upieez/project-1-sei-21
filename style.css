@@ -1,11 +1,8 @@
 body {
 	background-image: linear-gradient(to right,#FEC8D8,#87CEEB);
 	font-family: Emilys Candy;
+	overflow: hidden;  /* hides scroll bar */
 }
-
-/*.container {
-	display: 5px solid black;
-}*/
 
 .game-start{
 	font-size: 32px;
@@ -76,7 +73,6 @@ body {
 	background-image: url("images/box/white_box.png");
 	background-size: 600px;
 	background-repeat: no-repeat;
-/*	background-color: none;*/
 	width: 600px;
 	height: 414px;
 	margin: 0 auto;
@@ -102,7 +98,6 @@ body {
 }
 
 .donut-sidebar{
-	/*border:5px solid green;*/
 	display: inline-block;
 	width: 215px;
 	height: 460px;
