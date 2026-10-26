@@ -1,308 +1,255 @@
-console.log("Donut game project!")
+(function () {
+    "use strict";
 
-//----Image Sources in a variable----
-var plainDonut = "<img src='images/donuts/plain/plain_donut.png'>"
-var chocDonut = "<img src='images/donuts/brown/brown_donut_9.png'>"
-var chocDonut2 = "<img src='images/donuts/brown/brown_donut_2.png'>"
-var strawDonut = "<img src='images/donuts/red/red_donut_4.png'>"
-var blueberryDonut = "<img src='images/donuts/blue/blue_donut_6.png'>"
-var appleDonut = "<img src='images/donuts/green/green_donut_2.png'>"
-var cherryDonut = "<img src='images/donuts/pink/pink_donut_3.png'>"
-var lemonDonut = "<img src='images/donuts/yellow/yellow_donut_11.png'>"
-var grapeDonut = "<img src='images/donuts/purple/purple_donut_7.png'>"
-var cherryDonut = "<img src='images/donuts/red/red_donut_8.png'>"
-var passionDonut = "<img src='images/donuts/purple/purple_donut_12.png'>"
-var bananaDonut = "<img src='images/donuts/yellow/yellow_donut_8.png'>"
-var dragonDonut = "<img src='images/donuts/pink/pink_donut_2.png'>"
-var elderDonut = "<img src='images/donuts/blue/blue_donut_1.png'>"
-var pearDonut = "<img src='images/donuts/green/green_donut_3.png'>"
-var randomDonut = []
+    const { DONUTS, RULES, GameState } = window.MatchDonuts;
 
+    class GameView {
+        constructor(document) {
+            this.document = document;
+            this.container = document.querySelector(".container");
+            this.objectives = document.querySelector(".donut-objective");
+            this.box = document.querySelector(".donut-box");
+            this.takeaway = document.querySelector(".donut-takeaway");
+            this.palette = document.querySelector(".donut-clicker");
+            this.submitButton = document.querySelector(".donut-container button");
+            this.points = document.querySelector("#player-points");
+            this.timeouts = new Set();
+            this.screen = null;
 
-//----Global Variable----
-var count = 0;
-var points = 0;
-var timer = 45;
-var intervalClockObject;
-var intervalDonutObject;
+            const timer = document.createElement("div");
+            timer.className = "timer";
+            this.countdown = document.createElement("div");
+            this.countdown.id = "countdown";
+            timer.appendChild(this.countdown);
+            document.querySelector(".donut-sidebar").appendChild(timer);
+            this.renderPalette();
+        }
 
-//----Main menu screen----
+        createDonut(id) {
+            const donut = DONUTS.find(item => item.id === id);
+            const element = this.document.createElement("div");
+            element.className = "donut";
+            element.dataset.donutId = id;
+            const image = this.document.createElement("img");
+            image.src = "images/donuts/" + donut.image;
+            image.alt = donut.id.replace(/-/g, " ") + " donut";
+            element.appendChild(image);
+            return element;
+        }
 
-var selectScreen = function(){
-    //donut header text
-    var createDiv = document.createElement("div");
-    createDiv.classList.add("game-start");
-    createDiv.innerHTML = "<h1>Match The Donuts!</h1>";
-    document.body.prepend(createDiv);
-    var mainMenu = document.createElement("div");
-    mainMenu.classList.add("main-menu")
-    createDiv.appendChild(mainMenu);
+        renderPalette() {
+            this.palette.replaceChildren(...DONUTS.map(donut => this.createDonut(donut.id)));
+        }
 
-    //start donut DOM
-    var container = document.createElement("div");
-    var startDonut = document.createElement("div");
-    startDonut.classList.add("start-donut");
-    startDonut.innerHTML = "<img src='images/donuts/pink/pink_donut_7.png'>";
-    var startDonutText = document.createElement("div");
-    startDonutText.innerHTML = "Start Game!"
-    container.appendChild(startDonut);
-    container.appendChild(startDonutText);
-    mainMenu.appendChild(container);
+        showScreen(className, markup) {
+            if (this.screen) this.screen.remove();
+            this.screen = this.document.createElement("div");
+            this.screen.className = className;
+            this.screen.innerHTML = markup;
+            this.document.body.prepend(this.screen);
+            this.container.style.display = "none";
+            return this.screen;
+        }
 
-    //instruction donut DOM
-    var container1 = document.createElement("div");
-    var instructionDonut = document.createElement("div");
-    instructionDonut.classList.add("readme-donut");
-    instructionDonut.innerHTML = "<img src='images/donuts/blue/blue_donut_5.png'>";
-    var instructionDonutText = document.createElement("div");
-    instructionDonutText.innerHTML = "Instructions!"
-    container1.appendChild(instructionDonut);
-    container1.appendChild(instructionDonutText);
-    mainMenu.appendChild(container1);
-}
+        showMenu(onStart, onInstructions) {
+            const screen = this.showScreen("game-start", `
+                <h1>Match The Donuts!</h1>
+                <div class="main-menu">
+                    <div><div class="start-donut"><img src="images/donuts/pink/pink_donut_7.png" alt="Start game"></div><div>Start Game!</div></div>
+                    <div><div class="readme-donut"><img src="images/donuts/blue/blue_donut_5.png" alt="Instructions"></div><div>Instructions!</div></div>
+                </div>`);
+            const start = screen.querySelector(".start-donut");
+            const instructions = screen.querySelector(".readme-donut");
+            start.addEventListener("click", onStart);
+            instructions.addEventListener("click", onInstructions);
+            [start, instructions].forEach(element => {
+                element.addEventListener("mouseover", () => element.classList.add("jello", "animated"));
+                element.addEventListener("mouseout", () => element.classList.remove("jello", "animated"));
+            });
+        }
 
-// ----Starting the game with the overlay----
+        showInstructions(onBack) {
+            const screen = this.showScreen("game-start", `
+                <h1>Instructions</h1>
+                Match the type, amount and order of donuts in the first order to get the highest score!<br><br>
+                Click a donut to add it to the box. Click a donut in the box to remove it.<br><br>
+                Each correct donut earns you 100 points and adds a second to the timer.<br><br>
+                Each wrong donut loses 75 points. Orders with the right amount are then sent.<br><br>
+                A wrong amount loses 100 points and 5 seconds. Try that order again!<br><br>
+                <div class="gameOver">Back</div>`);
+            screen.querySelector(".gameOver").addEventListener("click", onBack);
+        }
 
-var gameStart = function(){
-    selectScreen();
+        showGame() {
+            if (this.screen) this.screen.remove();
+            this.screen = null;
+            this.container.style.removeProperty("display");
+            this.animateBox("bounceInLeft", 3000);
+        }
 
-    var containerDiv = document.querySelector(".game-start");
-    var container = document.querySelector(".container");
-    var startDonut = document.querySelector(".start-donut");
-    var readMeDonut = document.querySelector(".readme-donut");
-    var createDiv = document.createElement("div");
+        showGameOver(points, onRestart) {
+            const screen = this.showScreen("gameEnd", `
+                <h1>GAME OVER</h1><br>WOULD YOU LIKE TO START AGAIN?<br>
+                <div class="gameOver">Restart</div><br>YOUR POINTS IS: ${points}`);
+            screen.querySelector(".gameOver").addEventListener("click", onRestart);
+        }
 
-    // event listener for mouseover to add animation
-    startDonut.addEventListener("mouseover",function(){
-        startDonut.classList.add("jello");
-        startDonut.classList.add("animated");
-        });
-    readMeDonut.addEventListener("mouseover",function(){
-        readMeDonut.classList.add("jello");
-        readMeDonut.classList.add("animated");
-        });
-    startDonut.addEventListener("mouseout", function(){
-        startDonut.classList.remove("jello");
-        startDonut.classList.remove("animated");
-        });
-    readMeDonut.addEventListener("mouseout",function(){
-        readMeDonut.classList.remove("jello");
-        readMeDonut.classList.remove("animated");
-        });
+        renderStatus(state, submitting) {
+            this.points.textContent = state.points;
+            this.countdown.textContent = state.remainingSeconds + " secs";
+            this.submitButton.disabled = state.status !== "playing" || state.orders.length === 0 || submitting;
+        }
 
-    // event listener for when click starts game or go to instruction page
-    startDonut.addEventListener("click", function(){
-        containerDiv.style.display = "none";
-        container.style.removeProperty("display");
-        document.querySelector(".donut-box").classList.add("bounceInLeft");
-        document.querySelector(".donut-box").classList.add("animated");
-        setTimeout(function(){
-        document.querySelector(".donut-box").classList.remove("bounceInLeft");
-        document.querySelector(".donut-box").classList.remove("animated");
-        }, 3000)
-        startTimer(); // start the array timer
-        gameOverTimer(); // game end timer countdown
-    });
-    readMeDonut.addEventListener("click", function(){
-        document.body.removeChild(containerDiv);
-        createDiv.classList.add("game-start");
-        createDiv.innerHTML = "<h1>Instructions</h1> Match the correct type and amount of donuts and get the highest score! </br></br> Each correct type of donuts earns you 100 points and adds a second to the timer </br></br> Each wrong type of donuts reduces your score by 75 </br></br> Wrong amount of donuts will make you lose 100 points, reduces your time and you have to redo again! </br></br> <div class='gameOver'>Back</div>";
-        document.body.prepend(createDiv);
-        document.querySelector(".gameOver").addEventListener("click",function(){
-            document.body.removeChild(document.querySelector(".game-start"));
-            gameStart();
-        })
-    });
-}
+        renderBox(state, animateLast = false) {
+            this.takeaway.replaceChildren(...state.selectedDonuts.map((id, index) => {
+                const element = this.createDonut(id);
+                element.dataset.index = index;
+                if (animateLast && index === state.selectedDonuts.length - 1) {
+                    element.classList.add("bounceInRight", "animated");
+                }
+                return element;
+            }));
+        }
 
-gameStart()
+        addOrder(order) {
+            const row = this.document.createElement("div");
+            row.className = "donut-array bounceInRight animated";
+            row.dataset.orderId = order.id;
+            row.append(...order.donuts.map(id => this.createDonut(id)));
+            this.objectives.appendChild(row);
+        }
 
-//----Input Donut Function to Donut Box ----
+        completeOrder(order, onComplete) {
+            const row = this.objectives.querySelector(`[data-order-id="${order.id}"]`);
+            row.classList.add("slideOutUp");
+            this.after(500, () => {
+                row.remove();
+                onComplete();
+            });
+        }
 
-var addDonut = function(){
-//If statement to only add donuts if it's less than 6
-    if (count < 6){
-        count++;
-        var donutBox = document.querySelector(".donut-takeaway");
-        var div = document.createElement("div");
-        div.classList.add("donut");
-        div.classList.add("bounceInRight");
-        div.classList.add("animated");
-        div.innerHTML = ((this.innerHTML).trim());
-        donutBox.appendChild(div);
-        div.addEventListener("click",function(){
-            donutBox.removeChild(this);
-            count--;
-        })
-    }
-}
+        after(milliseconds, callback) {
+            const timeout = setTimeout(() => {
+                this.timeouts.delete(timeout);
+                callback();
+            }, milliseconds);
+            this.timeouts.add(timeout);
+            return timeout;
+        }
 
-//addDonut function runs when click on donut image
-var addDonutToContainer = function(){
-var clicker = document.querySelectorAll(".donut-clicker > .donut")
-for (var i = 0; i < clicker.length; i++){
-    clicker[i].addEventListener("click", addDonut);
-    }
-};
+        animateBox(animation, milliseconds) {
+            clearTimeout(this.boxAnimation);
+            this.timeouts.delete(this.boxAnimation);
+            this.box.classList.remove("bounceInLeft", "shake", "animated");
+            // Restart the animation even on consecutive incorrect submissions.
+            void this.box.offsetWidth;
+            this.box.classList.add(animation, "animated");
+            this.boxAnimation = this.after(milliseconds, () => this.box.classList.remove(animation, "animated"));
+        }
 
-addDonutToContainer();
+        clearAnimations() {
+            this.timeouts.forEach(timeout => clearTimeout(timeout));
+            this.timeouts.clear();
+            this.box.classList.remove("bounceInLeft", "shake", "animated");
+        }
 
-//----Generate Random Types of Donut in Objective----
-
-var randomDonuts = function(){
-    var donutOptions = [plainDonut, chocDonut, chocDonut2, strawDonut, blueberryDonut, appleDonut, cherryDonut, lemonDonut, grapeDonut, cherryDonut, passionDonut, bananaDonut, dragonDonut, elderDonut, pearDonut]
-    while (randomDonut.length < 6){
-        var randomNumber = Math.round(Math.random()* 14);
-        randomDonut.push(donutOptions[randomNumber])
-    }
-}
-
-//----Check for Correct Amount Function----
-
-var checkForCorrectAmt = function(){
-var firstArray = document.querySelectorAll(".donut-objective > .donut-array")[0];
-var donutArray = firstArray.querySelectorAll(".donut-array > .donut");
-var donutBox = document.querySelectorAll(".donut-takeaway > .donut");
-
-//correctDonuts will check if the individual donuts inside are the same type
-var checkForCorrectDonuts = function(){
-    for (var i = 0; i < donutArray.length; i++){
-        if(donutArray[i].innerHTML === donutBox[i].innerHTML){
-            console.log("correct type of donut!");
-            points += 100;
-            timer += 1;
-            document.querySelector("#player-points").textContent = points
-        } else {
-            console.log("wrong type of donut!")
-            document.querySelector(".donut-takeaway").innerHTML="";
-            count = 0;
-            points -= 75;
-            document.querySelector("#player-points").textContent = points
+        reset(state) {
+            this.clearAnimations();
+            this.objectives.replaceChildren();
+            this.renderBox(state);
+            this.renderStatus(state, false);
         }
     }
-    clearDonut();
-}
 
-//If statement to check the correct amount in box
- if (donutArray.length === donutBox.length){
-    checkForCorrectDonuts();
-    console.log("correct amount!");
-    } else {
-        console.log("wrong amount!");
-        document.querySelector(".donut-takeaway").innerHTML="";
-        document.querySelector(".donut-box").classList.add("shake");
-        document.querySelector(".donut-box").classList.add("animated");
-        setTimeout(function(){
-        document.querySelector(".donut-box").classList.remove("shake");
-        document.querySelector(".donut-box").classList.remove("animated");
-        }, 2000)
-        points -= 100;
-        document.querySelector("#player-points").textContent = points;
-        timer -= 5;
-        count = 0;
-    }
-};
+    class DonutGame {
+        constructor(state, view) {
+            this.state = state;
+            this.view = view;
+            this.submitting = false;
+            this.clockInterval = null;
+            this.orderInterval = null;
+            this.bindEvents();
+            this.showMenu();
+        }
 
-//checkForCorrectAmt Function runs when button is clicked
-var buttonChecker = function(){
-var selectButton = document.querySelector("button");
-selectButton.addEventListener("click", checkForCorrectAmt);
-};
+        bindEvents() {
+            this.view.palette.addEventListener("click", event => {
+                const donut = event.target.closest("[data-donut-id]");
+                if (donut && this.state.addDonut(donut.dataset.donutId)) {
+                    this.view.renderBox(this.state, true);
+                }
+            });
+            this.view.takeaway.addEventListener("click", event => {
+                const donut = event.target.closest("[data-index]");
+                if (donut && this.state.removeDonut(Number(donut.dataset.index))) {
+                    this.view.renderBox(this.state);
+                }
+            });
+            this.view.submitButton.addEventListener("click", () => this.submitOrder());
+        }
 
-buttonChecker();
+        showMenu() {
+            this.stopTimers();
+            this.submitting = false;
+            this.state.reset();
+            this.view.reset(this.state);
+            this.view.showMenu(() => this.start(), () =>
+                this.view.showInstructions(() => this.showMenu()));
+        }
 
-//----Generate Random Donut Amount Function----
+        start() {
+            if (this.state.status === "playing") return;
+            this.stopTimers();
+            this.submitting = false;
+            this.state.start();
+            this.view.reset(this.state);
+            this.view.showGame();
+            this.clockInterval = setInterval(() => {
+                this.state.tick();
+                this.update();
+            }, 1000);
+            this.orderInterval = setInterval(() => {
+                // A departing row still occupies a visible queue slot for 500ms.
+                if (this.state.orders.length + Number(this.submitting) >= RULES.queueCapacity) return;
+                const order = this.state.generateOrder();
+                if (order) this.view.addOrder(order);
+                this.update();
+            }, RULES.orderIntervalMs);
+        }
 
-var generateRandomDonutArray = function(){
-    var counter = document.querySelector(".donut-objective").childElementCount
-    if (counter < 5){
-    var randomNumber = Math.round(1 + Math.random() * 5)
-    var donutObjective = document.querySelector(".donut-objective");
-    var donutArray = document.createElement("div");
-    donutArray.classList.add("donut-array");
-    donutArray.classList.add("bounceInRight");
-    donutArray.classList.add("animated");
-    randomDonuts(); // call my random donuts function
-        // for loop to print out random amount of donut into the donut array
-        for (var i = 0; i < randomNumber; i++){
-            var donut = document.querySelector(".donut-array");
-            var donutDiv = document.createElement("div");
-            donutDiv.classList.add("donut");
-            donutDiv.innerHTML = randomDonut[i];
-            donutArray.appendChild(donutDiv);
+        submitOrder() {
+            if (this.submitting) return;
+            const result = this.state.submitOrder();
+            if (!result) return;
+            this.view.renderBox(this.state);
+            if (result.correctAmount) {
+                this.submitting = true;
+                this.view.completeOrder(result.order, () => {
+                    this.submitting = false;
+                    this.update();
+                });
+            } else {
+                this.view.animateBox("shake", 2000);
             }
-            donutObjective.appendChild(donutArray);
+            this.update();
+        }
+
+        update() {
+            this.view.renderStatus(this.state, this.submitting);
+            if (this.state.status === "over") {
+                this.stopTimers();
+                this.view.clearAnimations();
+                this.view.showGameOver(this.state.points, () => this.showMenu());
+            }
+        }
+
+        stopTimers() {
+            clearInterval(this.clockInterval);
+            clearInterval(this.orderInterval);
+            this.clockInterval = null;
+            this.orderInterval = null;
+        }
     }
-    randomDonut = []; //reverting back to an empty array
-}
 
-//timer function to be called when game starts
-var startTimer = function(){
-    intervalDonutObject = setInterval(generateRandomDonutArray, 2000); //setInterval to keep adding more objective to the game
-}
-
-//----Clear the donut objective when correct----
-
-var clearDonut = function(){
-    var clear = document.querySelector(".donut-objective")
-    document.querySelector(".donut-array").classList.add("slideOutUp");
-    setTimeout(function(){
-        clear.removeChild(document.querySelector(".donut-array"));
-    }, 500)
-    document.querySelector(".donut-takeaway").innerHTML="";
-    count = 0;
-}
-
-//----Gameover function for when the game ends----
-
-var gameOver = function(){
-    clearInterval(intervalClockObject);
-    clearInterval(intervalDonutObject);
-    var mainBody = document.querySelector("body")
-    mainBody.innerHTML="";
-    var gameEnd = document.createElement("div");
-    gameEnd.classList.add("gameEnd");
-    mainBody.appendChild(gameEnd);
-    document.querySelector(".gameEnd").innerHTML = "<h1>GAME OVER</h1> </br> WOULD YOU LIKE TO START AGAIN?" + " </br>" + "<div class='gameOver'>Restart</div>" + "</br>" + "YOUR POINTS IS: " + points;
-    document.querySelector(".gameOver").addEventListener("click", function(){
-        window.location.reload(true);
-    })
-}
-
-// gamer over timer to start when user clicks on begin game
-var gameOverTimer = function(){
-
-    //creates the clock timer at the bottom of the sidebar
-    var clockSideBar = document.querySelector(".donut-sidebar");
-    var createClockTimerDiv = document.createElement("div");
-    createClockTimerDiv.classList.add("timer");
-    clockSideBar.appendChild(createClockTimerDiv);
-    var createClockTimer = document.querySelector(".timer");
-    var createClockTimerDivDiv = document.createElement("div");
-    createClockTimerDivDiv.setAttribute("id","countdown");
-    createClockTimer.appendChild(createClockTimerDivDiv);
-
-    // runs the clock function every second
-    intervalClockObject = setInterval(clock,1000);
-}
-
-// ---- Countdown timer ----
-
-var clock = function(){
-    var time = document.querySelector("#countdown");
-    timer--;
-    time.textContent = timer + " secs";
-
-    if (timer === 0){
-        gameOver();// runs the game over screen when timer reaches specified timing
-    }
-}
-
-
-//----Generating Random Color Donuts----
-// //for future use
-// var randomColors = function(){
-//     var randomColorDonuts = ["brown","blue","red","yellow","green","purple","pink"];
-//     var i = Math.round(Math.random()*7);
-//     return "<img src='images/donuts/"+randomColorDonuts[i]+"/"+randomColorDonuts[i]+"_donut_"+Math.round(1+Math.random()*9)+".png'>"
-// };
+    new DonutGame(new GameState(), new GameView(document));
+})();

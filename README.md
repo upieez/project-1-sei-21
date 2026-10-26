@@ -2,6 +2,67 @@
 
 ![https://media.giphy.com/media/l4FGHzb9sBnQmYjyU/giphy.gif](https://media.giphy.com/media/l4FGHzb9sBnQmYjyU/giphy.gif)
 
+## What this project does
+
+**Match The Donuts** is a browser game built with vanilla JavaScript, HTML and CSS.
+Fill the box to match the oldest order, then click **SEND ORDER!** Donuts must
+match in both type and position. Click a donut in the box to remove it.
+
+- Rounds begin with 45 seconds. Orders arrive every 2 seconds, with up to 5 queued.
+- Orders and the player's box hold up to 6 donuts.
+- With the correct quantity, each matching position earns 100 points and 1 second;
+  each mismatch loses 75 points. The order is then sent, even with mismatches.
+- With the wrong quantity, lose 100 points and 5 seconds, empty the box and retry
+  the same order. Scores can be negative.
+- When time runs out, the game displays the final score. Restart returns to the menu.
+
+## Run locally
+
+Open `index.html` in a modern browser. There is no build step or runtime dependency.
+The original artwork, layout and CSS animations are retained.
+
+## OOP structure
+
+The game uses composition across three classes:
+
+| Class | File | Responsibility |
+| --- | --- | --- |
+| `GameState` | `game-state.js` | Donut selection, order queue, scoring and remaining time. No DOM or timer dependencies. |
+| `GameView` | `script.js` | Screens, donut rendering, score display and animation cleanup. |
+| `DonutGame` | `script.js` | Input events, round lifecycle, interval ownership and coordination between state and view. |
+
+`DONUTS` is the single catalog for both the palette and generated orders. Matching
+uses donut IDs rather than image markup. `RULES` contains the game constants.
+The scripts use a scoped namespace and classic script loading so local files and
+static hosting work without a module server. The model also exports CommonJS for tests.
+
+The refactor fixes empty-queue submission crashes, penalties skipping past zero,
+duplicate submission during order removal, stale animation callbacks and timer
+cleanup on restart. All 15 selectable donuts now appear in generated orders;
+types and quantities are sampled uniformly instead of the original biased rounding
+and duplicated cherry entry. The initial 45-second countdown is displayed immediately.
+
+## Validation
+
+Run the model regression tests using Node.js 18 or newer:
+
+```sh
+node --test tests/game-state.test.js
+```
+
+With Playwright and its Chromium browser installed, run the browser smoke test:
+
+```sh
+node tests/browser-smoke.cjs
+```
+
+If Playwright is installed outside this project, set `PLAYWRIGHT_MODULE` to its
+absolute module path. The browser test opens the local HTML file, uses deterministic
+orders and a controlled clock, and checks navigation, image loading, selection,
+queue limits, scoring, penalties, rapid submission, expiry and restart cleanup.
+
+The original project notes and development history follow.
+
 ## Motivation
 
 1. This game will help me understand CSS better and improve on it
